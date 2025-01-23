@@ -13,4 +13,6 @@ trulens-core
 trulens-connectors-snowflake
 trulens-feedback
 trulens-providers-cortex
+# Pin Python version
+--python-version ">=3.11.0,<3.12.0"
 
