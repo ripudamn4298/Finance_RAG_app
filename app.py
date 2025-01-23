@@ -38,7 +38,7 @@ def check_conda_environment():
         st.stop()
 
 # Add this at the start of your app.py, before any other imports
-check_conda_environment()
+# check_conda_environment()
 
 import streamlit as st
 from snowflake.snowpark import Session
