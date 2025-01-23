@@ -1,0 +1,7 @@
+[server]
+# Explicitly set Python version for Streamlit Cloud
+pythonVersion = "3.11"
+
+[global]
+# Other Streamlit configurations can go here
+developmentMode = false
