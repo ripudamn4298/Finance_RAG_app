@@ -48,6 +48,8 @@ from financial_system.financial_advisor_rag import FinancialAdvisorRAG
 from financial_system.financial_advisor_rag import ChatMemory
 import os
 from dotenv import load_dotenv
+import platform
+st.write("Python version:", platform.python_version())
 
 
 # Load environment variables
