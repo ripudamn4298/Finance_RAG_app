@@ -1,5 +1,6 @@
 snowflake-snowpark-python
 snowflake-connector-python
+snowflake.core
 streamlit
 pandas
 python-dotenv
