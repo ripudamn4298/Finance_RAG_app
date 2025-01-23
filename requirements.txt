@@ -1,29 +1,19 @@
-# Core Snowflake Dependencies
-snowflake-snowpark-python>=1.24.0
-snowflake-connector-python>=3.12.4
-snowflake.core>=1.0.2
-snowflake.cortex>=1.0.2
-
-# Data Processing & Analysis
-pandas>=2.2.3
-numpy>=1.26.4
-yfinance>=0.2.51
-
-# API & Web
-requests>=2.32.3
-newsapi-python>=0.2.7
-streamlit>=1.28.0
-
-# Environment & Configuration
-python-dotenv>=1.0.0
-
-# Machine Learning & LLM Tools
-trulens-eval>=1.2.11
-trulens-core>=1.2.11
-trulens-connectors-snowflake>=1.2.11
-trulens-feedback>=1.2.11
-trulens-apps>=1.2.11
-trulens-providers-cortex>=1.2.11
-
-# Additional Dependencies
-typing-extensions>=4.11.0
+snowflake.core
+snowflake-snowpark-python
+snowflake-connector-python
+snowflake.cortex
+streamlit
+pandas
+python-dotenv
+yfinance
+newsapi-python
+requests
+numpy
+trulens-eval
+trulens-core
+trulens-connectors-snowflake
+trulens-feedback
+trulens-apps
+trulens-providers-cortex
+openai
+anthropic
