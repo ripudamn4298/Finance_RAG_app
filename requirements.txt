@@ -1,4 +1,3 @@
-snowflake.core
 snowflake-snowpark-python
 snowflake-connector-python
 snowflake.cortex
