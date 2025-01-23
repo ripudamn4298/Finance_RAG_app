@@ -5,6 +5,12 @@ def check_conda_environment():
     
     # Get current environment info
     current_env = os.environ.get('CONDA_DEFAULT_ENV')
+    
+    # For Streamlit Cloud, we should skip the environment check
+    if 'STREAMLIT_SHARING' in os.environ:
+        return
+        
+    # For local development, enforce environment
     expected_env = 'getting_started_llmops'
     env_path = '/Users/riparmar/miniconda3/envs/getting_started_llmops'
     
@@ -19,7 +25,7 @@ def check_conda_environment():
         """)
         st.stop()
     
-    # Check if we're using the correct Python interpreter
+    # Check Python interpreter only for local development
     if not sys.executable.startswith(env_path):
         st.error(f"""
         Wrong Python interpreter!
@@ -28,20 +34,6 @@ def check_conda_environment():
         
         Please ensure you're using the correct Conda environment:
         conda activate {expected_env}
-        """)
-        st.stop()
-    
-    # Verify critical packages
-    try:
-        import snowflake.snowpark
-        import snowflake.connector
-    except ImportError as e:
-        st.error(f"""
-        Missing required Snowflake packages: {str(e)}
-        Please install in your Conda environment:
-        
-        conda activate {expected_env}
-        conda install -c conda-forge snowflake-snowpark-python snowflake-connector-python
         """)
         st.stop()
 
