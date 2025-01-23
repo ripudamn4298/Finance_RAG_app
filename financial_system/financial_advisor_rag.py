@@ -18,6 +18,7 @@ from trulens.core import Feedback
 from trulens.core import Select
 from trulens.connectors.snowflake import SnowflakeConnector
 from trulens.apps.custom import instrument
+import streamlit as st
 # from trulens.apps.custom import instrument as trulens_instrument
 
 # def instrument(f):
@@ -1174,7 +1175,8 @@ class FinancialDataManager:
         self.session = session
         self.data_fetcher = FinancialDataFetcher(
             session=session,
-            api_key=os.getenv('RAPIDAPI_KEY')
+            # api_key=os.getenv('RAPIDAPI_KEY')
+            api_key= st.secrets["rapidapi"]["key"]
         )
 
     def sync_company_data(self, symbol: str, params: dict):

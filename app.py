@@ -64,14 +64,23 @@ load_dotenv()
 # Initialize Snowflake session
 def create_session():
     try:
+        # connection_parameters = {
+        #     "account": os.getenv("SNOWFLAKE_ACCOUNT"),
+        #     "user": os.getenv("SNOWFLAKE_USER"),
+        #     "password": os.getenv("SNOWFLAKE_USER_PASSWORD"),
+        #     "role": os.getenv("SNOWFLAKE_ROLE"),
+        #     "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE"),
+        #     "database": os.getenv("SNOWFLAKE_DATABASE"),
+        #     "schema": os.getenv("SNOWFLAKE_SCHEMA")
+        # }
         connection_parameters = {
-            "account": os.getenv("SNOWFLAKE_ACCOUNT"),
-            "user": os.getenv("SNOWFLAKE_USER"),
-            "password": os.getenv("SNOWFLAKE_USER_PASSWORD"),
-            "role": os.getenv("SNOWFLAKE_ROLE"),
-            "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE"),
-            "database": os.getenv("SNOWFLAKE_DATABASE"),
-            "schema": os.getenv("SNOWFLAKE_SCHEMA")
+            "account": st.secrets["snowflake"]["account"],
+            "user": st.secrets["snowflake"]["user"],
+            "password": st.secrets["snowflake"]["password"],
+            "role": st.secrets["snowflake"]["role"],
+            "warehouse": st.secrets["snowflake"]["warehouse"],
+            "database": st.secrets["snowflake"]["database"],
+            "schema": st.secrets["snowflake"]["schema"]
         }
         
         # Validate required parameters
