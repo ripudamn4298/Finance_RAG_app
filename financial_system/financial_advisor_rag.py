@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from snowflake.snowpark.session import Session
-from snowflake.cortex import Complete
+# from snowflake.cortex import Complete
+from .llm_manager import LLMManager
 from typing import Tuple, Dict, List
 import yfinance as yf
 import pandas as pd
@@ -680,7 +681,8 @@ class FinancialDataFetcher:
             
             print("\nAnalyzing grouping preference...")
             prompt_start = datetime.now()
-            group_by = Complete("mistral-large2", group_by_prompt).strip().lower()
+            # group_by = Complete("mistral-large2", group_by_prompt).strip().lower()
+            group_by = self.llm(group_by_prompt)
             prompt_end = datetime.now()
             print(f"Group by analysis took: {prompt_end - prompt_start}")
             print(f"Determined group_by: {group_by}")
@@ -1200,6 +1202,7 @@ class FinancialAdvisorRAG:
         self.session = snowpark_session
         self.data_manager = FinancialDataManager(session=snowpark_session)
         self.retriever = EnhancedFinancialRetriever(snowpark_session)
+        self.llm= LLMManager()
 
     @instrument
     def retrieve(self, query: str, symbol: str = None, params: dict = None) -> dict:
@@ -1286,7 +1289,9 @@ class FinancialAdvisorRAG:
         """
 
         try:
-            response = Complete("mistral-large2", prompt).strip()
+            # response = Complete("mistral-large2", prompt).strip()
+            print("\nPrompting LLM for parameter identification")
+            response = self.llm(prompt)
             response = response.replace('```json', '').replace('```', '').strip()
             result = json.loads(response)
             
@@ -1529,7 +1534,9 @@ class FinancialAdvisorRAG:
 
         try:
             # Add response cleaning and better error handling
-            llm_response = Complete("mistral-large2", analysis_prompt).strip()
+            # llm_response = Complete("mistral-large2", analysis_prompt).strip()
+            llm_response = self.llm(analysis_prompt)
+
             print(f"Raw LLM response: {llm_response}")
             
             # Clean the response - remove any non-JSON text
@@ -1574,7 +1581,9 @@ class FinancialAdvisorRAG:
                 3. If any required information is missing, indicate that new data fetch is needed
                 """
 
-                response = Complete("mistral-large2", response_prompt)
+                # response = Complete("mistral-large2", response_prompt)
+                response = self.llm(response_prompt)
+
                 return False, response
 
             print("New data fetch needed")
@@ -1655,7 +1664,9 @@ class FinancialAdvisorRAG:
             """
             
             print("\nGenerating response using Complete function...")
-            response = Complete("mistral-large2", prompt)
+            # response = Complete("mistral-large2", prompt)
+            response = self.llm(prompt)
+
             print(f"\nGenerated response: {response[:200]}...")
             
             # If this was a general query, add a note about fetching more data
