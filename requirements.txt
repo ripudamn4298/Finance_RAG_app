@@ -13,5 +13,7 @@ trulens-core
 trulens-connectors-snowflake
 trulens-feedback
 trulens-providers-cortex
+transformers 
+torch
 
 
