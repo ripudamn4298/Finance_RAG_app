@@ -15,5 +15,5 @@ trulens-feedback
 trulens-providers-cortex
 transformers 
 torch
-
+huggingface_hub
 
