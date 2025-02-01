@@ -76,26 +76,16 @@ class LLMManager:
         
         for attempt in range(self.max_retries):
             try:
-                # Make API call using InferenceClient
-                response = self.client.post(
-                    json={
-                        "inputs": prompt,
-                        "parameters": {
-                            "max_new_tokens": max_tokens,
-                            "temperature": 0.7,
-                            "top_p": 0.95,
-                            "return_full_text": False,
-                        },
-                    }
+                # Use text_generation instead of post
+                response = self.client.text_generation(
+                    prompt,
+                    max_new_tokens=max_tokens,
+                    temperature=0.7,
+                    top_p=0.95,
+                    do_sample=True
                 )
                 
-                # Decode bytes response and extract generated text
-                if isinstance(response, bytes):
-                    response_json = json.loads(response.decode())
-                    generated_text = response_json[0]["generated_text"]
-                else:
-                    generated_text = response
-
+                generated_text = response
                 duration = time.time() - start_time
                 
                 # Check if the response is meant to be JSON
